@@ -15,11 +15,12 @@ import { ProductoService } from './productos/productos.service';
       username: 'doadmin',
       password: 'AVNS_QWAcIwrGob4iB7FDG0I',
       database: 'db-store',
-      entities: [Productos],
-      synchronize: false,
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true,
       autoLoadEntities: true,
       ssl: {
         ca: "./certificates/ca-certificate.crt",
+        rejectUnauthorized: false
       },
     }),
     TypeOrmModule.forFeature([Productos]),
