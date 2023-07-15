@@ -16,9 +16,10 @@ import { ProductoService } from './productos/productos.service';
       password: 'AVNS_QWAcIwrGob4iB7FDG0I',
       database: 'db-store',
       entities: [Productos],
-      synchronize: true,
+      synchronize: false,
       autoLoadEntities: true,
       ssl: {
+        ca: "./certificates/ca-certificate.crt",
         rejectUnauthorized: false
       },
     }),
