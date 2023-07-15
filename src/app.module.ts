@@ -10,13 +10,17 @@ import { ProductoService } from './productos/productos.service';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'Colo-colo1',
-      database: 'db_store',
+      host: 'db-store-do-user-12886983-0.b.db.ondigitalocean.com',
+      port: 25060,
+      username: 'doadmin',
+      password: 'AVNS_QWAcIwrGob4iB7FDG0I',
+      database: 'db-store',
       entities: [Productos],
       synchronize: true,
+      autoLoadEntities: true,
+      ssl: {
+        rejectUnauthorized: false
+      },
     }),
     TypeOrmModule.forFeature([Productos]),
   ],
