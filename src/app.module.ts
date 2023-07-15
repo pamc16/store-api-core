@@ -20,7 +20,6 @@ import { ProductoService } from './productos/productos.service';
       autoLoadEntities: true,
       ssl: {
         ca: "./certificates/ca-certificate.crt",
-        rejectUnauthorized: false
       },
     }),
     TypeOrmModule.forFeature([Productos]),
