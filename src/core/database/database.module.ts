@@ -16,7 +16,7 @@ import { ConfigService } from 'src/config/config.service';
         password: configService.get('DB_SERVER_PASSWORD'),
         database: configService.get('DATABASE'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        ssl: {
+        ssl: process.env.NODE_ENV.trim() === 'production' && {
           rejectUnauthorized: false,
           ca: configService.get('SSL_CA_CERTIFICATES'),
         },

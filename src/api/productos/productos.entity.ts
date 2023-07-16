@@ -19,7 +19,4 @@ export class Productos {
 
   @Column()
   categoria: string;
-
-  @Column({ type: 'blob', nullable: true })
-  imagen: Buffer;
 }
