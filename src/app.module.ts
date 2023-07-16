@@ -1,31 +1,28 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { LoggerMiddleware } from './core/middleware/logger.middleware';
+import { APP_FILTER } from '@nestjs/core';
+import { DatabaseModule } from './core/database/database.module';
+import { ProductoService } from './api/productos/productos.service';
+import { ProductoController } from './api/productos/productos.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Productos } from './productos/productos.entity';
-import { ProductoController } from './productos/productos.controller';
-import { ProductoService } from './productos/productos.service';
+import { Productos } from './api/productos/productos.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'db-store-do-user-12886983-0.b.db.ondigitalocean.com',
-      port: 25060,
-      username: 'doadmin',
-      password: 'AVNS_QWAcIwrGob4iB7FDG0I',
-      database: 'db-store',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
-      autoLoadEntities: true,
-      ssl: {
-        ca: "./certificates/ca-certificate.crt",
-        rejectUnauthorized: false
-      },
-    }),
+    DatabaseModule,
     TypeOrmModule.forFeature([Productos]),
   ],
-  controllers: [AppController, ProductoController],
-  providers: [AppService, ProductoService],
+  controllers: [AppController],
+  providers: [
+    AppService,
+    ProductoService,
+  ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  constructor() {}
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes(ProductoController);
+  }
+}
