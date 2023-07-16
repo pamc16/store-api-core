@@ -14,7 +14,7 @@ import { Productos } from './api/productos/productos.entity';
     DatabaseModule,
     TypeOrmModule.forFeature([Productos]),
   ],
-  controllers: [AppController],
+  controllers: [AppController, ProductoController],
   providers: [
     AppService,
     ProductoService,
