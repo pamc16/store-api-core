@@ -1,9 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Categorias } from '../categorias/categorias.entity';
+import { Subcategorias } from '../sub-categorias/sub-categorias.entity';
 
 @Entity()
 export class Productos {
   @PrimaryGeneratedColumn()
-  id: number;
+  producto_id: number;
 
   @Column()
   nombre: string;
@@ -17,6 +19,9 @@ export class Productos {
   @Column()
   cantidad_disponible: number;
 
-  @Column()
-  categoria: string;
+  @ManyToOne(() => Categorias, (categoria) => categoria.productos)
+  categorias: Categorias;
+
+  @ManyToOne(() => Subcategorias, (subcategoria) => subcategoria.productos)
+  subcategorias: Subcategorias;
 }

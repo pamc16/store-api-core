@@ -15,7 +15,7 @@ export class ProductoService {
   }
 
   async findOne(id: number): Promise<Productos> {
-    return this.productoRepository.findOne({ where: { id: id } });
+    return this.productoRepository.findOne({ where: { producto_id: id } });
   }
 
   async create(productoData: Partial<Productos>): Promise<Productos> {
