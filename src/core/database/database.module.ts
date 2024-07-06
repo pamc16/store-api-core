@@ -9,7 +9,7 @@ import { ConfigService } from 'src/config/config.service';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        type: 'mysql',
+        type: 'mariadb',
         host: configService.get('DB_SERVER_HOST'),
         port: Number(configService.get('DB_SERVER_PORT')),
         username: configService.get('DB_SERVER_USERNAME'),

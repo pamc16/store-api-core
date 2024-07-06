@@ -1,8 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import * as cors from 'cors';
-import { json } from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,9 +12,13 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
-  app.use(json({ limit: '64mb' }));
-  app.use(cors());
+  app.enableCors()
 
-  await app.listen(8080);
+  await app.listen('8080', '0.0.0.0', () => {
+		// eslint-disable-next-line no-console
+		console.info(
+			`\n \x1B[32m➜\x1B[0m Local: \x1B[36mhttp://localhost:${'8080'}/${'api'}\x1B[0m \n`,
+		);
+	});
 }
 bootstrap();
