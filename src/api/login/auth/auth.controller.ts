@@ -1,8 +1,10 @@
 // src/auth/auth.controller.ts
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './auth.dto';
+import { ApiKeyGuard } from 'src/guard/api-key.guard';
 
+@UseGuards(ApiKeyGuard)
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}

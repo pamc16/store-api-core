@@ -24,7 +24,7 @@ export class AppModule implements OnModuleInit {
 	onModuleInit() {
 		this._logger.debug(
 			`🔒 \x1B[4mApi Key\x1B[0m enabled: ${
-				process.env.SECURITY_ENABLED === 'true'
+				this.configService.get('ENABLE_API_KEY') === 'true'
 					? '\x1B[32mON'
 					: '\x1B[31mOFF'
 			}\x1B[0m`,
